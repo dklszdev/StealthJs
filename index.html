@@ -2,22 +2,20 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>JS Obfuscator Free - Professional Protection</title>
-  
-  <!-- SEO / Meta Tags -->
-  <meta name="description" content="Herramienta profesional gratuita para ofuscar y proteger código JavaScript. Incluye encriptación polimórfica, protección contra depuración y almacenamiento seguro." />
+  <title>JS Obfuscator Free - Enhanced v1.0.2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  
+  <!-- SEO & Social -->
+  <meta name="description" content="Protege tu código JavaScript con Stealth Engine v1.0.2. Incluye Domain Lock Inteligente, Anti-Beautify y Cloud Storage." />
+  <meta name="keywords" content="javascript obfuscator, js protector, anti-debug, domain lock, free obfuscator" />
   
   <link rel="stylesheet" href="style.css" />
   
-  <!-- Firebase Compat (Funciona sin servidor local) -->
+  <!-- Firebase Compat (Estable y sin errores de módulos) -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-  <!-- Iconos -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  
-  <!-- Script Principal (Sin type="module" para evitar errores) -->
   <script src="main.js" defer></script>
 </head>
 <body>
@@ -32,13 +30,13 @@
 
       <div class="config-scroll">
         
-        <!-- SECCIÓN CLOUD -->
+        <!-- CLOUD -->
         <div class="group highlight-group">
           <label class="group-title" style="color:#fff"><i class="ph-fill ph-cloud-arrow-up"></i> Stealth Cloud</label>
           <div class="input-block">
-            <input type="text" id="inputPasteAuthor" placeholder="Tu Nombre / Alias" class="dark-input mb-2">
+            <input type="text" id="inputPasteAuthor" placeholder="Tu Alias / Nombre" class="dark-input mb-2">
             <button id="btnUploadPaste" class="btn-paste">
-              <i class="ph-bold ph-upload-simple"></i> Subir Código
+              <i class="ph-bold ph-upload-simple"></i> Guardar Paste
             </button>
           </div>
           <div id="pasteResult" class="paste-result" style="display:none;">
@@ -49,23 +47,28 @@
 
         <hr class="separator">
 
-        <!-- Opciones -->
+        <!-- CORE -->
         <div class="group">
-          <label class="group-title">Núcleo de Encriptación</label>
+          <label class="group-title">Nivel de Cifrado</label>
           <div class="select-wrapper">
             <select id="algoSelect">
-              <option value="xor" selected>Polimórfico (Recomendado)</option>
+              <option value="xor" selected>Polimórfico (Máxima Seguridad)</option>
               <option value="hex">Hexadecimal</option>
-              <option value="b64">Base64 Standard</option>
+              <option value="b64">Base64</option>
             </select>
           </div>
         </div>
 
         <div class="group">
-          <label class="group-title">Red & Visual</label>
+          <label class="group-title">Integridad & Red</label>
           <label class="toggle-row">
             <span><i class="ph ph-wifi-high"></i> Network Camouflage</span>
             <input type="checkbox" id="checkNetwork" checked>
+          </label>
+           <!-- NUEVO -->
+          <label class="toggle-row">
+            <span><i class="ph ph-code"></i> Anti-Beautify (Formato)</span>
+            <input type="checkbox" id="checkAntiBeautify" checked>
           </label>
           <label class="toggle-row">
             <span><i class="ph ph-chat-text"></i> Diálogo de Inicio</span>
@@ -73,15 +76,24 @@
           </label>
           <div id="dialogInputs" class="hidden-inputs">
             <input type="text" id="inputDialogText" placeholder="Mensaje..." class="dark-input mb-2">
-            <input type="text" id="inputDialogBtn" placeholder="Texto Botón..." class="dark-input">
+            <input type="text" id="inputDialogBtn" placeholder="Botón..." class="dark-input">
           </div>
         </div>
 
         <div class="group">
           <label class="group-title">Defensas Activas</label>
+          <!-- NUEVO -->
           <label class="toggle-row">
-            <span><i class="ph ph-prohibit"></i> Console Killer</span>
+            <span><i class="ph ph-bomb"></i> Trap Mines (Trampas)</span>
+            <input type="checkbox" id="checkTrapMines" checked>
+          </label>
+          <label class="toggle-row">
+            <span><i class="ph ph-prohibit"></i> Console Killer 2.0</span>
             <input type="checkbox" id="checkConsole" checked>
+          </label>
+          <label class="toggle-row">
+            <span><i class="ph ph-browsers"></i> DevTools Detect (Size)</span>
+            <input type="checkbox" id="checkDevTools">
           </label>
           <label class="toggle-row">
             <span><i class="ph ph-skull"></i> Self-Destruct</span>
@@ -95,10 +107,6 @@
             <span><i class="ph ph-bug"></i> Anti-Debug Loop</span>
             <input type="checkbox" id="checkAntiDebug" checked>
           </label>
-          <label class="toggle-row">
-            <span><i class="ph ph-fingerprint"></i> Anti-Tamper</span>
-            <input type="checkbox" id="checkTamper">
-          </label>
         </div>
 
         <div class="group">
@@ -111,8 +119,9 @@
             <span><i class="ph ph-file-code"></i> Minificar</span>
             <input type="checkbox" id="checkMinify" checked>
           </label>
+          
           <div class="input-block mt-2">
-            <input type="text" id="inputDomain" placeholder="Bloqueo Dominio (ej: sitio.com)" class="dark-input">
+            <input type="text" id="inputDomain" placeholder="Lock Dominio (ej: google.com)" class="dark-input">
           </div>
           <div class="input-block mt-2">
             <input type="text" id="inputWatermark" placeholder="Marca de Agua" class="dark-input">
@@ -131,10 +140,10 @@
     <main class="main-content">
       <div class="editor-pane">
         <div class="pane-header">
-          <span class="tab active"><i class="ph ph-code"></i> Entrada JS</span>
+          <span class="tab active"><i class="ph ph-code"></i> Código Fuente</span>
           <button id="btnClear" class="icon-btn" title="Limpiar"><i class="ph ph-trash"></i></button>
         </div>
-        <textarea id="codeSource" class="code-editor" placeholder="// Pega tu código aquí...&#10;console.log('Test');" spellcheck="false"></textarea>
+        <textarea id="codeSource" class="code-editor" placeholder="// Pega tu JS aquí...&#10;alert('Sistema Seguro');" spellcheck="false"></textarea>
       </div>
 
       <div class="editor-pane">
@@ -145,40 +154,24 @@
             <button id="btnDownload" class="icon-btn" title="Descargar"><i class="ph ph-download-simple"></i></button>
           </div>
         </div>
-        <textarea id="codeOutput" class="code-editor result-editor" readonly spellcheck="false" placeholder="El código encriptado aparecerá aquí..."></textarea>
-        <div id="statusBar" class="status-bar">Esperando...</div>
+        <textarea id="codeOutput" class="code-editor result-editor" readonly spellcheck="false" placeholder="El código ofuscado aparecerá aquí..."></textarea>
+        <div id="statusBar" class="status-bar">Sistema Listo v1.0.2</div>
       </div>
     </main>
   </div>
 
-  <!-- Modal ToS (Extendido) -->
+  <!-- Modal ToS -->
   <div id="tosModal" class="modal-overlay show">
     <div class="modal-box tos-box">
       <div class="tos-icon"><i class="ph-duotone ph-file-text"></i></div>
       <h2>Términos de Servicio</h2>
       <p class="tos-subtitle">JS Stealth Engine v1.0.2</p>
-      
       <div class="tos-content">
-        <p><strong>1. Aceptación de los Términos</strong><br>
-        Al acceder y utilizar JS Stealth Engine (en adelante "la Herramienta"), usted acepta cumplir y estar legalmente obligado por los términos y condiciones descritos en este acuerdo. Si no está de acuerdo con alguna parte de estos términos, no debe utilizar la Herramienta.</p>
-
-        <p><strong>2. Uso Permitido y Restricciones</strong><br>
-        La Herramienta se proporciona exclusivamente para fines educativos, de investigación de seguridad y para la protección de propiedad intelectual legítima (código propio). Está estrictamente prohibido utilizar la Herramienta para ofuscar malware, ransomware, spyware, troyanos, scripts de phishing o cualquier código destinado a dañar sistemas informáticos, violar la privacidad de terceros o realizar actividades ilegales.</p>
-
-        <p><strong>3. Exención de Responsabilidad</strong><br>
-        La Herramienta se proporciona "tal cual", sin garantía de ningún tipo, expresa o implícita. Los desarrolladores (Silkspectre0 y Adrianodev) no se hacen responsables de ningún daño directo, indirecto, incidental o consecuente que pueda surgir del uso o la imposibilidad de uso de la Herramienta, ni del uso indebido que terceros puedan hacer del código procesado.</p>
-
-        <p><strong>4. Almacenamiento en la Nube (Stealth Cloud)</strong><br>
-        Al utilizar la función de "Subir Código" o "Pastes", usted reconoce y acepta que su código ofuscado será almacenado en servidores de terceros (Google Firebase). Aunque no almacenamos registros de IP ni datos personales identificables, usted es responsable del contenido que sube. Nos reservamos el derecho de eliminar cualquier contenido que viole estos términos sin previo aviso.</p>
-
-        <p><strong>5. Propiedad Intelectual</strong><br>
-        Usted conserva todos los derechos sobre el código fuente original que introduce en la Herramienta. La ofuscación no transfiere la propiedad intelectual a los desarrolladores de la Herramienta.</p>
-
-        <p><strong>6. Modificaciones</strong><br>
-        Nos reservamos el derecho de modificar estos términos en cualquier momento. El uso continuado de la Herramienta tras cualquier cambio constituye la aceptación de dichos cambios.</p>
+        <p>1. <strong>Responsabilidad:</strong> Herramienta para uso educativo y protección de código propio.</p>
+        <p>2. <strong>Cloud:</strong> Los "Pastes" se guardan en Firebase bajo tu responsabilidad.</p>
+        <p>3. <strong>Garantía:</strong> El software se ofrece tal cual, sin garantías implícitas.</p>
       </div>
-
-      <button id="btnAcceptTos" class="btn-primary">He leído y acepto los términos</button>
+      <button id="btnAcceptTos" class="btn-primary">Aceptar y Continuar</button>
     </div>
   </div>
 
@@ -187,12 +180,12 @@
     <div class="modal-box">
       <div class="modal-icon"><i class="ph-fill ph-shield-check"></i></div>
       <h2>JS STEALTH</h2>
-      <p class="modal-version">v1.0.2 Oficial</p>
+      <p class="modal-version">v1.0.2 Enhanced</p>
       <ul class="modal-credits">
-        <li><strong>Silkspectre0</strong> <span class="role">UI / HTML / Design</span></li>
-        <li><strong>Adrianodev</strong> <span class="role">Core / Security / Cloud</span></li>
+        <li><strong>Silkspectre0</strong> <span class="role">Frontend</span></li>
+        <li><strong>Adrianodev</strong> <span class="role">Backend / Security</span></li>
       </ul>
-      <button id="closeModalBtn" class="modal-btn">Iniciar Aplicación</button>
+      <button id="closeModalBtn" class="modal-btn">Acceder</button>
     </div>
   </div>
 </body>
