@@ -1,2 +1,4 @@
-# StealhJs-
-Web Page For Obsfucation Free and Online
+# Stealth JS
+
+English:
+JsStealth, developed by AdrianoDev and Silkspectre0, is a completely free online JavaScript code encryption website. We provide servers where users can share their encrypted code pastes. We offer three different encryption methods: 1- Base64: Fast and ultra-fast to decrypt using sites like https://deobfuscate-io 2- Hex Encoding: The most common and widely used by websites because it's very easy to implement, but offers a medium level of decryption. 3- XOR + Anti-Debug + Base64: Our obfuscation engine, which you can try for free on our site. This obfuscation system is virtually unbreakable; for a user to crack it, they would have to try over 100,000 different keys scattered throughout the code, some of which are dead code. We use the Apache License 2.0 Closed Source, not Open Source Share this repository: https://github.com/dklszdev/StealthJs Our fully functional website: https://dklszdev.github.io/StealthJs/ Current version: 1.0.2 My GitHub: https://github.com/dklszdev
